@@ -1,4 +1,6 @@
 FROM python:3.7.9
+MAINTAINER kenwu/370483689@qq.com
+
 WORKDIR /var/app
 
 COPY requirements.txt ./
