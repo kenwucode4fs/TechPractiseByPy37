@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-@File:         gunicorn.conf
+@File:         gunicorn.conf_Hello
 @Description:  
 @Author:       kenwu
 @Date:         2023/4/3
@@ -15,6 +15,6 @@ worker_class = "gevent" # 采用gevent库，支持异步处理请求，提高吞
 daemon = False
 loglevel = 'info'
 access_log_format = '%(t)s %(p)s %(h)s "%(r)s" %(s)s %(L)s %(b)s %(f)s" "%(a)s"'
-errorlog = '/data/applog/kenwu/TechPractiseByPy37/hello/gunicorn.error.log'
-accesslog = '/data/applog/kenwu/TechPractiseByPy37/hello/gunicorn.access.log'
+errorlog = '/Users/kenwu/Documents/TechSet/TechPractiseByPy37/logs/gunicorn.error.log'
+accesslog = '/Users/kenwu/Documents/TechSet/TechPractiseByPy37/logs/gunicorn.access.log'
 debug = False
