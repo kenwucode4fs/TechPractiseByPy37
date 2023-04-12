@@ -18,7 +18,7 @@ def hello():
     健康检查，hello接口
     :return:
     """
-    return "<p>Hello, This is TechPractiseByPy37!</p>"
+    return "<p>hello, This is TechPractiseByPy37!</p>"
 
 
 if __name__ == '__main__':
