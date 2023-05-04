@@ -10,7 +10,7 @@ WORKDIR /kenwu/kenwuapp/app
 COPY requirements.txt ./
 
 # 安装第三方包
-RUN chmod +x ./start.sh \
+RUN chmod +x start.sh \
     && pip install --upgrade pip \
     && pip install -r requirements.txt
 
