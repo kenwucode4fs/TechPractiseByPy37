@@ -15,4 +15,4 @@ EXPOSE 8002
 
 # 设置运行命令
 ENTRYPOINT ["python3"]
-CMD ["gunicorn", "-c", "gunicorn.conf.py", "techpractiserun:app"]
+CMD ["gunicorn", "-c", "./gunicorn.conf.py", "techpractiserun:app"]
