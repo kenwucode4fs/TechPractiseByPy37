@@ -12,3 +12,7 @@ RUN pip install --upgrade pip \
 
 # 暴露端口
 EXPOSE 8002
+
+# 设置运行命令
+ENTRYPOINT ["python3"]
+CMD ["gunicorn", "-c", "gunicorn.conf.py", "techpractiserun:app"]
