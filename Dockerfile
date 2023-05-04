@@ -14,5 +14,4 @@ RUN pip install --upgrade pip \
 EXPOSE 8002
 
 # 设置运行命令
-ENTRYPOINT ["python3"]
 CMD ["gunicorn", "-c", "./gunicorn.conf.py", "hello.techpractiserun:app"]
