@@ -16,7 +16,7 @@ worker_class = "gevent"  # 采用gevent库，支持异步处理请求，提高�
 daemon = False
 loglevel = 'info'
 access_log_format = '%(t)s %(p)s %(h)s "%(r)s" %(s)s %(L)s %(b)s %(f)s" "%(a)s"'
-errorlog = os.path.join(project_prefix, 'logs/gunicorn.error.log')
-accesslog = os.path.join(project_prefix, 'logs/gunicorn.access.log')
+errorlog = '/logs/app/gunicorn.error.log'
+accesslog = '/logs/app/gunicorn.access.log'
 
 debug = False
