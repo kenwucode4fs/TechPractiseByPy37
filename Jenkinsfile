@@ -11,7 +11,11 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'echo \'hello world!\''
+        sh 'echo ${TEST_TAG}'
+        sh 'echo ${HOST_CODE_PATH}'
+        sh 'echo ${HOST_LOGS_PATH}'
+        sh 'echo ${HOST_PORT}'
+        sh 'echo ${PACKAGE_NAME}'
       }
     }
   }
