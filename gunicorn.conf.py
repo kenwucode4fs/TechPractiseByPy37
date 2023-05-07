@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-@File:         gunicorn.conf_hello
+@File:         gunicorn.conf.py
 @Description:  
 @Author:       kenwu
 @Date:         2023/4/3

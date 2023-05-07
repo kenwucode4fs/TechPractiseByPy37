@@ -13,5 +13,10 @@ pipeline {
       }
     }
 
+    stage('bye2') {
+      steps {
+        sh 'echo \'bye bye2!\''
+      }
+    }
   }
 }
