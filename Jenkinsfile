@@ -8,7 +8,7 @@ pipeline {
 
   agent any
   stages {
-    stage('Build') {
+    stage('BuildImage') {
       steps {
         sh 'echo ${TEST_TAG}'
         sh 'echo ${WORKSPACE}'
@@ -17,5 +17,26 @@ pipeline {
         sh 'echo ${PACKAGE_NAME}'
       }
     }
+
+    stage('TagImage') {
+      steps {
+        sh 'echo ${TEST_TAG}'
+        sh 'echo ${WORKSPACE}'
+        sh 'echo ${HOST_LOGS_PATH}'
+        sh 'echo ${HOST_PORT}'
+        sh 'echo ${PACKAGE_NAME}'
+      }
+    }
+
+    stage('RunContainer') {
+      steps {
+        sh 'echo ${TEST_TAG}'
+        sh 'echo ${WORKSPACE}'
+        sh 'echo ${HOST_LOGS_PATH}'
+        sh 'echo ${HOST_PORT}'
+        sh 'echo ${PACKAGE_NAME}'
+      }
+    }
+
   }
 }
