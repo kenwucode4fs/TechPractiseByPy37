@@ -10,16 +10,7 @@ pipeline {
   stages {
     stage('BuildImage') {
       steps {
-        sh 'echo ${TEST_TAG}'
-        sh 'echo ${WORKSPACE}'
-        sh 'echo ${HOST_LOGS_PATH}'
-        sh 'echo ${HOST_PORT}'
-        sh 'echo ${PACKAGE_NAME}'
-      }
-    }
-
-    stage('TagImage') {
-      steps {
+        sh 'docker build -t ${PACKAGE_NAME}:v${TEST_TAG}.${BUILD_NUMBER} .'
         sh 'echo ${TEST_TAG}'
         sh 'echo ${WORKSPACE}'
         sh 'echo ${HOST_LOGS_PATH}'
