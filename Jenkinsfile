@@ -21,6 +21,14 @@ pipeline {
 
     stage('RunContainer') {
       steps {
+        sh 'docker stop ${PACKAGE_NAME}'
+        sh 'docker stop ${PACKAGE_NAME}'
+        sh 'docker run --user=kenwu:kenwu --name ${PACKAGE_NAME} -v ${WORKSPACE}:/kenwu/app  -v ${HOST_LOGS_PATH}:/logs/app -p ${HOST_PORT}:8002  --privileged=true -itd ${PACKAGE_NAME}:${TEST_TAG}.${BUILD_NUMBER}'
+      }
+    }
+
+    stage('Complete') {
+      steps {
         sh 'echo ${TEST_TAG}'
         sh 'echo ${WORKSPACE}'
         sh 'echo ${HOST_LOGS_PATH}'
@@ -28,6 +36,5 @@ pipeline {
         sh 'echo ${PACKAGE_NAME}'
       }
     }
-
   }
 }
