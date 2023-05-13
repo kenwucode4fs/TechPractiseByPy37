@@ -6,7 +6,7 @@ pipeline {
         string defaultValue: 'techpractisebypy37', description: '镜像名称', name: 'PACKAGE_NAME', trim: true
     }
 
-  agent any
+  agent { dockerfile true}
   stages {
     stage('BuildImage') {
       steps {
@@ -22,7 +22,7 @@ pipeline {
     stage('RunContainer') {
       steps {
         sh 'docker stop ${PACKAGE_NAME}'
-        sh 'docker stop ${PACKAGE_NAME}'
+        sh 'docker rm ${PACKAGE_NAME}'
         sh 'docker run --user=kenwu:kenwu --name ${PACKAGE_NAME} -v ${WORKSPACE}:/kenwu/app  -v ${HOST_LOGS_PATH}:/logs/app -p ${HOST_PORT}:8002  --privileged=true -itd ${PACKAGE_NAME}:${TEST_TAG}.${BUILD_NUMBER}'
       }
     }
