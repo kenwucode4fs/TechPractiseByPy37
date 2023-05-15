@@ -32,7 +32,7 @@ pipeline {
     stage('编译镜像') {
       steps {
         sh '''
-        docker build -t ${PACKAGE_NAME}:v${TEST_TAG}.${BUILD_NUMBER} .
+        docker build -t ${PACKAGE_NAME}:${TEST_TAG}.${BUILD_NUMBER} .
         echo ${TEST_TAG}
         echo ${WORKSPACE}
         echo ${HOST_LOGS_PATH}
