@@ -11,7 +11,7 @@ pipeline {
     stage('清理历史镜像及容器'){
       steps {
         sh '''
-            CONTAINER_ID=`docker ps |grep ${PACKAGE_NAME} |awk '{print $1}''
+            CONTAINER_ID=`docker ps |grep ${PACKAGE_NAME} |awk \'{print $1}\'`
             IMAGE_ID=`docker images |grep ${PACKAGE_NAME} |awk \'{print $3}\'`
             echo "CONTAINER_ID : $CONTAINER_ID"
             echo "IMAGE_ID : $IMAGE_ID"
