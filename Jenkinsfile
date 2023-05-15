@@ -6,35 +6,47 @@ pipeline {
         string defaultValue: 'techpractisebypy37', description: '镜像名称', name: 'PACKAGE_NAME', trim: true
     }
 
-  agent { dockerfile true}
+  agent any
   stages {
-    stage('BuildImage') {
+    stage('清理历史镜像及容器'){
       steps {
-        sh 'docker build -t ${PACKAGE_NAME}:v${TEST_TAG}.${BUILD_NUMBER} .'
-        sh 'echo ${TEST_TAG}'
-        sh 'echo ${WORKSPACE}'
-        sh 'echo ${HOST_LOGS_PATH}'
-        sh 'echo ${HOST_PORT}'
-        sh 'echo ${PACKAGE_NAME}'
+        sh '''
+            CONTAINER_ID=`docker ps |grep ${PACKAGE_NAME} |awk '{print $1}''
+            IMAGE_ID=`docker images |grep ${PACKAGE_NAME} |awk \'{print $3}\'`
+            echo "CONTAINER_ID : $CONTAINER_ID"
+            echo "IMAGE_ID : $IMAGE_ID"
+            if [ "$IMAGE_ID" !=  "" ] ; then
+                if [ "$CONTAINER_ID" !=  "" ] ; then
+                    CONTAINER_INFO=`docker ps |grep ${PACKAGE_NAME} |awk \'{print $0}\'`
+                    echo "删除容器 $CONTAINER_INFO"
+                    docker rm -f $CONTAINER_ID
+                    fi
+                    IMAGE_INFO=`docker images |grep ${PACKAGE_NAME} |awk \'{print $0}\'`
+                    echo "删除镜像 $IMAGE_INFO"
+                    docker rmi -f $IMAGE_ID
+            fi
+        '''
       }
     }
 
-    stage('RunContainer') {
+    stage('编译镜像') {
       steps {
-        sh 'docker stop ${PACKAGE_NAME}'
-        sh 'docker rm ${PACKAGE_NAME}'
+        sh '''
+        docker build -t ${PACKAGE_NAME}:v${TEST_TAG}.${BUILD_NUMBER} .
+        echo ${TEST_TAG}
+        echo ${WORKSPACE}
+        echo ${HOST_LOGS_PATH}
+        echo ${HOST_PORT}
+        echo ${PACKAGE_NAME}
+        '''
+      }
+    }
+
+    stage('启动容器') {
+      steps {
         sh 'docker run --user=kenwu:kenwu --name ${PACKAGE_NAME} -v ${WORKSPACE}:/kenwu/app  -v ${HOST_LOGS_PATH}:/logs/app -p ${HOST_PORT}:8002  --privileged=true -itd ${PACKAGE_NAME}:${TEST_TAG}.${BUILD_NUMBER}'
       }
     }
 
-    stage('Complete') {
-      steps {
-        sh 'echo ${TEST_TAG}'
-        sh 'echo ${WORKSPACE}'
-        sh 'echo ${HOST_LOGS_PATH}'
-        sh 'echo ${HOST_PORT}'
-        sh 'echo ${PACKAGE_NAME}'
-      }
-    }
   }
 }
